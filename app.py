@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
         if len(sys.argv) > 1:
             url = sys.argv[1]
-            print "Using the following URL:"+url
+            print "Using the following URL: <"+url+">"
             parsed_url = urlparse.urlparse(url)
             valid = bool(parsed_url.scheme)
 
@@ -38,4 +38,5 @@ if __name__ == '__main__':
                 print '\n'
                 print "Done"
         else:
-            print "Please provide the URL as an input param... (http://<url>)"
+            print "Please provide the URL as an input param! " \
+                  "Usage: python app.py http://<url>"
