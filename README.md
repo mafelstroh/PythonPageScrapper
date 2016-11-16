@@ -15,6 +15,4 @@ This is a basic exercise to demonstrate Python's capabilities to scrap easily we
 
 
 
-
-
 [ManuelFelipe.io](http://manuelfelipe.io)
