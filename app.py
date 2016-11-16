@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Code by Manuel F. Stroh S.
 '''
@@ -18,16 +19,23 @@ if __name__ == '__main__':
 
         if len(sys.argv) > 1:
             url = sys.argv[1]
-            print url
+            print "Using the following URL:"+url
             parsed_url = urlparse.urlparse(url)
             valid = bool(parsed_url.scheme)
+
             if not valid:
-                print "Please provide a valid url as an input param"
+                print "Please provide a valid URL as an input param"
             else:
                 # Instantiate
                 ps = PageScraper.PageScraper(url)
+
+                # Scrap if valid URL is provided
                 ps.scrap()
+
+                # Print out the results
+                ps.output()
+
                 print '\n'
                 print "Done"
         else:
-            print "Please provide the url as an input param"
+            print "Please provide the URL as an input param... (http://<url>)"
