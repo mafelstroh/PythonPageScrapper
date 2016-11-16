@@ -40,4 +40,4 @@ if __name__ == '__main__':
                 print "Done"
         else:
             print "Please provide the URL as an input param! " \
-                  "Usage: python app.py http://<url>"
+                  "Usage: python main.py http://<url>"
