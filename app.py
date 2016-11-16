@@ -13,6 +13,7 @@ import urlparse
 if __name__ == '__main__':
     # Checking for default UTF-8 encoding
     default_encoding = 'utf-8'
+
     if sys.getdefaultencoding() != default_encoding:
         reload(sys)
         sys.setdefaultencoding(default_encoding)
