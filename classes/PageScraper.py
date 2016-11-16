@@ -2,7 +2,8 @@ import collections
 import re
 import urllib2
 
-class PageScrapper(object):
+
+class PageScraper(object):
 
     # Constructor
     def __init__(self, url):

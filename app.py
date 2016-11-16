@@ -5,6 +5,7 @@ Basic page scrapper that will generate stats about the most HTML used tags in
 the given URL
 '''
 
+from classes import PageScraper
 import sys
 import urlparse
 
@@ -24,7 +25,7 @@ if __name__ == '__main__':
                 print "Please provide a valid url as an input param"
             else:
                 # Instantiate
-                ps = PageScrapper(url)
+                ps = PageScraper.PageScraper(url)
                 ps.scrap()
                 print '\n'
                 print "Done"
