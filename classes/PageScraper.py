@@ -1,8 +1,7 @@
 import collections
 import re
 import urllib2
-import urlparse
-
+import HtmlPageParser
 
 class PageScraper(object):
 
@@ -11,6 +10,7 @@ class PageScraper(object):
         self.url = url
         self.counter_top_5 = 0
         self.counter_general = 0
+        # Taken from Django's url regex validator
         self.valid_url_regex = re.compile(
             r'^(?:http|ftp)s?://'
             r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'
@@ -34,6 +34,9 @@ class PageScraper(object):
         scrapped_data_array = []
         order_response = urllib2.urlopen(self.url)
         order_content = order_response.read()
+
+        hps = HtmlPageParser.HtmlPageParser()
+        hps.feed(order_content)
 
         # Using basic regular expression to fetch HTML tags
         html_tags = re.findall(r'<(\w+)\s+\w+.*?>', order_content)
