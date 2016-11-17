@@ -8,36 +8,53 @@ the given URL
 
 from classes import PageScraper
 import sys
-import urlparse
+import argparse
 
 if __name__ == '__main__':
+    # Default URL to scrap if not provided by the user
+    DEFAULT_URL = "http://ordergroove.com/company"
     # Checking for default UTF-8 encoding
-    default_encoding = 'utf-8'
+    DEFAULT_ENCODING = 'utf-8'
 
-    if sys.getdefaultencoding() != default_encoding:
+    if sys.getdefaultencoding() != DEFAULT_ENCODING:
         reload(sys)
-        sys.setdefaultencoding(default_encoding)
+        sys.setdefaultencoding(DEFAULT_ENCODING)
 
-        if len(sys.argv) > 1:
-            url = sys.argv[1]
-            print "Using the following URL: <"+url+">"
-            parsed_url = urlparse.urlparse(url)
-            valid = bool(parsed_url.scheme)
+        # Makes use of argparse.ArgumentParser() to handle 
+        # the arguments that the user has entered.
+        parser = argparse.ArgumentParser()
+        
+        # Optional making it dynaming in a manner that the 
+        # user can specify another URL to be scrapped.
+        parser.add_argument("-u", "--url", 
+            help="Specifies the URL to be scrapped. If not provided "\
+                 "will use default page given for the exercise (" + DEFAULT_URL + ")",
+            type=str,
+            default=DEFAULT_URL)
 
-            if not valid:
-                print "Please provide a valid URL as an input param"
-            else:
-                # Instantiate
-                ps = PageScraper.PageScraper(url)
+        # Action store_true will make this value boolean when received.
+        parser.add_argument("-v", 
+            "--verbose", 
+            help="Displays output with more information",
+            action="store_true")        
 
-                # Scrap if valid URL is provided
-                ps.scrap()
+        # Parse the arguments
+        args = parser.parse_args()
+        
+        if args.verbose:
+            print "Scrapping process...using the following URL: " + args.url
+            print "\n"
+            print "---------------------------------------"
+            print "\n"
 
-                # Print out the results
-                ps.output()
+        # Parse URL
+        # parsed_url = urlparse.urlparse(args.url)
 
-                print '\n'
-                print "Done"
-        else:
-            print "Please provide the URL as an input param! " \
-                  "Usage: python main.py http://<url>"
+        # Start the process here
+        ps = PageScraper.PageScraper(args.url)
+
+        ps.validate_url()
+        ps.scrap()
+        ps.output()
+
+        print "Done"

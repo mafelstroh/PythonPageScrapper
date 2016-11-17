@@ -1,6 +1,7 @@
 import collections
 import re
 import urllib2
+import urlparse
 
 
 class PageScraper(object):
@@ -10,8 +11,24 @@ class PageScraper(object):
         self.url = url
         self.counter_top_5 = 0
         self.counter_general = 0
+        self.valid_url_regex = re.compile(
+            r'^(?:http|ftp)s?://'
+            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'
+            r'localhost|'
+            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
+            r'(?::\d+)?'
+            r'(?:/?|[/?]\S+)$',
+            re.IGNORECASE)
+
+    def validate_url(self):
+        # Validate a well formed URL
+        if not re.match(self.valid_url_regex, self.url):
+            print "ERROR: Malformed URL. Please provide a well formed \
+                   URL (http://www.myDomain.com) "
+            raise SystemExit
 
     def scrap(self):
+        # Starting already with a parsed URL
         print "Starting scrapping process..."
 
         scrapped_data_array = []
