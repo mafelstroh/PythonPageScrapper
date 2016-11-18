@@ -42,10 +42,10 @@ if __name__ == '__main__':
         args = parser.parse_args()
         
         if args.verbose:
+            print "\n"
             print "Scrapping process...using the following URL: " + args.url
             print "\n"
             print "---------------------------------------"
-            print "\n"
 
         # Parse URL
         # parsed_url = urlparse.urlparse(args.url)
@@ -53,8 +53,9 @@ if __name__ == '__main__':
         # Start the process here
         ps = PageScraper.PageScraper(args.url)
 
+        # Validation method before starting the process
         ps.validate_url()
         ps.scrap()
-        ps.output()
+        ps.output(args.verbose)
 
-        print "Done"
+        print "\nDone...!"

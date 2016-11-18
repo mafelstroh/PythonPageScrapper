@@ -29,39 +29,35 @@ class PageScraper(object):
 
     def scrap(self):
         # Starting already with a parsed URL
+        print "\n"
         print "Starting scrapping process..."
 
-        scrapped_data_array = []
         order_response = urllib2.urlopen(self.url)
         order_content = order_response.read()
 
         hps = HtmlPageParser.HtmlPageParser()
         hps.feed(order_content)
 
-        # Using basic regular expression to fetch HTML tags
-        html_tags = re.findall(r'<(\w+)\s+\w+.*?>', order_content)
-
-        # Append each item to an array, then convert it to a
-        # collection.Counter in order to make easier some operations
-        for p in html_tags:
-            scrapped_data_array.append((str(p)))
-
         # Sort the array
-        scrapped_data_array.sort()
+        hps.tag_data.sort()
 
         # Get the 5 most used tags and show the count of them
-        self.counter_top_5 = collections.Counter(scrapped_data_array)\
+        self.counter_top_5 = collections.Counter(hps.tag_data)\
             .most_common(5)
 
         # Get a general count of HTML tags
-        self.counter_general = collections.Counter(scrapped_data_array)
+        self.counter_general = collections.Counter(hps.tag_data)
 
-    def output(self):
-        print '\n'
-        print('### Written by Manuel F. Stroh S. ### \n')
-        print '\n'
-        print('Top 5 <HTML> tags and their counts is ', self.counter_top_5)
-        print '\n'
-        print('General <HTML> tags used tags with their respective count: ')
+    def output(self, verbose=0):
+        # Print output
+        if bool(verbose):
+            print '\n'
+            print('### Written by Manuel F. Stroh S. ### \n')
+            print('Page scrapping with Python...\n')
 
+        print('Top 5 <HTML> tags and their counts is: ')
+        print self.counter_top_5
+        print '\n'
+
+        print('General <HTML> tags used tags with their respective count: \n')
         print(collections.Counter(self.counter_general))

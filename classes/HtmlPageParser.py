@@ -1,5 +1,11 @@
-import HTMLParser
+from HTMLParser import HTMLParser
 
-class HtmlPageParser(HTMLParser.HTMLParser):
+class HtmlPageParser(HTMLParser):
+    def __init__(self):
+        # initialize the base class
+        HTMLParser.__init__(self)
+        self.tag_data = []
+
     def handle_starttag(self, tag, attrs):
-        tag
+        # Append the scrapped tagas to an array
+        self.tag_data.append((str(tag)))
