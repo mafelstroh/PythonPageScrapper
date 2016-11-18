@@ -1,3 +1,5 @@
+# Making use of HTMLParser instead of
+# using re to find handle HTML parsing
 from HTMLParser import HTMLParser
 
 

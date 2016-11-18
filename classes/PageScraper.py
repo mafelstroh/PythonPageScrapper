@@ -23,6 +23,10 @@ class PageScraper(object):
 
     def validate_url(self):
         # Validate a well formed URL
+        """
+
+        :rtype: bool
+        """
         if not re.match(self.valid_url_regex, self.url):
             print "ERROR: Malformed URL. Please provide a well formed \
                    URL (http://www.myDomain.com) "
