@@ -27,11 +27,13 @@ class PageScraper(object):
             print "ERROR: Malformed URL. Please provide a well formed \
                    URL (http://www.myDomain.com) "
             raise SystemExit
+        else:
+            return bool(1)
 
     def scrap(self):
         # Starting already with a parsed URL
-        print "\n"
-        print "Starting scrapping process..."
+        print("\n")
+        print("Starting scrapping process...")
 
         order_response = urllib2.urlopen(self.url)
         order_content = order_response.read()
@@ -52,13 +54,13 @@ class PageScraper(object):
     def output(self, verbose=0):
         # Print output
         if bool(verbose):
-            print '\n'
+            print("\n")
             print('### Written by Manuel F. Stroh S. ### \n')
             print('Page scrapping with Python...\n')
 
         print('Top 5 <HTML> tags and their counts is: ')
-        print self.counter_top_5
-        print '\n'
+        print(self.counter_top_5)
+        print("\n")
 
         print('General <HTML> tags used tags with their respective count: \n')
         print(collections.Counter(self.counter_general))
