@@ -3,6 +3,7 @@ import re
 import urllib2
 import HtmlPageParser
 
+
 class PageScraper(object):
 
     # Constructor

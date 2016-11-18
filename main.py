@@ -20,37 +20,35 @@ if __name__ == '__main__':
         reload(sys)
         sys.setdefaultencoding(DEFAULT_ENCODING)
 
-        # Makes use of argparse.ArgumentParser() to handle 
+        # Makes use of argparse.ArgumentParser() to handle
         # the arguments that the user has entered.
         parser = argparse.ArgumentParser()
-        
-        # Optional making it dynaming in a manner that the 
+
+        # Optional making it dynaming in a manner that the
         # user can specify another URL to be scrapped.
-        parser.add_argument("-u", "--url", 
-            help="Specifies the URL to be scrapped. If not provided "\
-                 "will use default page given for the exercise (" + DEFAULT_URL + ")",
-            type=str,
-            default=DEFAULT_URL)
+        parser.add_argument("-u", "--url",
+                            help="Specifies the URL to be scrapped. If not provided "
+                            "will use default page given for the exercise (" +
+                            DEFAULT_URL + ")",
+                            type=str,
+                            default=DEFAULT_URL)
 
         # Action store_true will make this value boolean when received.
-        parser.add_argument("-v", 
-            "--verbose", 
-            help="Displays output with more information",
-            action="store_true")        
+        parser.add_argument("-v",
+                            "--verbose",
+                            help="Displays output with more information",
+                            action="store_true")
 
         # Parse the arguments
         args = parser.parse_args()
-        
+
         if args.verbose:
             print "\n"
             print "Scrapping process...using the following URL: " + args.url
             print "\n"
             print "---------------------------------------"
 
-        # Parse URL
-        # parsed_url = urlparse.urlparse(args.url)
-
-        # Start the process here
+        # Parse URL, start the process here
         ps = PageScraper.PageScraper(args.url)
 
         # Validation method before starting the process

@@ -1,6 +1,8 @@
 from HTMLParser import HTMLParser
 
+
 class HtmlPageParser(HTMLParser):
+
     def __init__(self):
         # initialize the base class
         HTMLParser.__init__(self)
