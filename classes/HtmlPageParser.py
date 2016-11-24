@@ -11,5 +11,5 @@ class HtmlPageParser(HTMLParser):
         self.tag_data = []
 
     def handle_starttag(self, tag, attrs):
-        # Append the scrapped tagas to an array
+        # Append the scrapped tags to an array
         self.tag_data.append((str(tag)))
